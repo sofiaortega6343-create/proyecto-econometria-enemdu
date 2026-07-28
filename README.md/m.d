@@ -28,4 +28,4 @@ Este repositorio contiene la estimación econométrica de modelos de respuesta b
 pip install -r requirements.txt
 python src/modelo_econometrico.py
 
-  
+- **Dashboard Interactivo:** [Ver Dashboard en Vercel](https://proyecto-econometria-enemdu-eu17-nine.vercel.app)  
