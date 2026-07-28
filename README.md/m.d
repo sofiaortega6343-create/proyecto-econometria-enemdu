@@ -29,3 +29,4 @@ pip install -r requirements.txt
 python src/modelo_econometrico.py
 
 - **Dashboard Interactivo:** [Ver Dashboard en Vercel](https://proyecto-econometria-enemdu-eu17-nine.vercel.app)  
+                                                       
