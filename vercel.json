@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "src/modelo_econometrico.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/modelo_econometrico.py"
+    }
+  ]
+}
