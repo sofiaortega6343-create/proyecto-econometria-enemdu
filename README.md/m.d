@@ -1,32 +1,53 @@
-# Determinantes del Empleo Informal en Ecuador (ENEMDU - INEC)
-**Proyecto Final de Econometría Aplicada**
+# Determinantes del Empleo Informal en Ecuador: Un Enfoque Econométrico
 
-Este repositorio contiene la estimación econométrica de modelos de respuesta binaria (Logit/Probit) para analizar la probabilidad de empleo informal en el Ecuador, utilizando datos de la Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU) del INEC[cite: 1].
+[![Vercel Dashboard](https://img.shields.io/badge/Dashboard-Vercel-blue?style=for-the-badge&logo=vercel)](https://proyecto-econometria-enemdu-qwji.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/sofiaortega6343-create/proyecto-econometria-enemdu)
 
-## Enlaces Directos del Proyecto
-- **Minipaper Académico (PDF):** [Ver Documento PDF](ORTEGA_SOFIA_PROYECTO_FINAL_ECONOMETRIA.pdf)[cite: 1]
-- **Dashboard Interactivo:** [Despliegue en Vercel](#) *(Enlace de visualización)*[cite: 1]
+## 📌 Resumen del Proyecto
+Este estudio analiza los factores determinantes de la probabilidad de pertenecer al sector informal en Ecuador utilizando datos microeconómicos de la **Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU - INEC)** sobre una muestra representativa de 1,000 trabajadores.
 
-## Diccionario de Variables
-| Variable | Tipo | Descripción | Valores / Unidades |
-| :--- | :--- | :--- | :--- |
-| `informal` | Binaria (Dependiente) | Condición de ocupación informal | 1 = Informal, 0 = Formal[cite: 1] |
-| `escolaridad` | Continua | Años de educación aprobados | 0 a 19 años[cite: 1] |
-| `edad` | Continua | Edad del trabajador | 18 a 65 años[cite: 1] |
-| `sexo` | Categórica | Sexo del individuo | 1 = Hombre, 0 = Mujer[cite: 1] |
-| `area` | Categórica | Zona de residencia | 1 = Urbano, 0 = Rural[cite: 1] |
-| `fexp` | Continua | Factor de expansión del INEC | Ponderador representativo[cite: 1] |
+Se evalúan y comparan dos metodologías econométricas:
+1. **Modelo de Probabilidad Lineal (MPL - MCO)** como modelo de línea base.
+2. **Modelo Logit (Efectos Marginales Promedio - AME)** como especificación principal acotada en el rango $[0, 1]$.
 
-## Estructura del Repositorio
-- `datos/`: Bases de datos procesadas y tratadas (`enemdu_procesada.csv`)[cite: 1].
-- `src/`: Scripts modulares en Python con la estimación de modelos econométricos y efectos marginales (`modelo_econometrico.py`)[cite: 1].
-- `prompts/`: Registro detallado sobre el uso responsable de Inteligencia Artificial (`registro_uso_ia.md`)[cite: 1].
-- `requirements.txt`: Dependencias del proyecto para garantizar reproducibilidad[cite: 1].
+---
 
-## Requisitos de Ejecución
-```bash
-pip install -r requirements.txt
-python src/modelo_econometrico.py
+## 📊 Pregunta de Investigación
+> ¿En qué medida los años de escolaridad, la edad, el sexo y el área geográfica determinan la probabilidad de pertenecer al sector informal en Ecuador?
 
-- **Dashboard Interactivo:** [Ver Dashboard en Vercel](https://proyecto-econometria-enemdu-eu17-nine.vercel.app)  
+---
+
+## 📈 Comparación de Resultados Econométricos
+
+| Variable | Modelo 1: MPL (MCO) <br> *(Coeficiente)* | Modelo 2: Logit <br> *(Efecto Marginal - AME)* | p-value (Logit) | Interpretación Económica (Logit) |
+| :--- | :---: | :---: | :---: | :--- |
+| **Escolaridad** | -0.0192 | **-0.0186** | 0.000 *** | -1.86% prob. de informalidad por año lectivo adicional |
+| **Edad** | -0.0038 | **-0.0035** | 0.000 *** | -0.35% prob. de informalidad por año cumplido |
+| **Sexo (Hombre)** | -0.0435 | **-0.0419** | 0.081 * | -4.19% menor probabilidad frente a mujeres |
+| **Área (Urbana)** | -0.0362 | **-0.0351** | 0.186 | -3.51% menor probabilidad en zona urbana |
+
+*Significancia estadística: *** p < 0.01, ** p < 0.05, * p < 0.10*
+
+---
+
+## ⚙️ Diagnóstico de Modelos
+
+| Métrica | Modelo 1: MPL (MCO) | Modelo 2: Logit |
+| :--- | :---: | :---: |
+| **Ajuste ($R^2$ / Pseudo $R^2$)** | $R^2 = 0.0825$ | Pseudo $R^2 = 0.0898$ |
+| **Estadístico F / LR** | $F = 22.41$ ($p < 0.001$) | $\text{LR } \chi^2 = 89.42$ ($p < 0.001$) |
+| **Criterios de Información** | N/A | AIC: $915.86$ \| BIC: $940.40$ |
+| **Observaciones** | 1,000 | 1,000 |
+
+---
+
+## 💡 Conclusión y Recomendación de Política
+- **Alineación Econométrica:** Ambos modelos coinciden en el signo y la magnitud de los efectos.
+- **Variable Clave:** La **escolaridad** es el determinante estructural con mayor impacto y significancia estadística ($p < 0.01$). Un mayor nivel educativo disminuye de forma sistemática la probabilidad de caer en el empleo informal.
+- **Preferencia Teórica:** Se selecciona el **Modelo Logit** como la especificación válida para el análisis de política pública debido a que corrige las limitantes técnicas del MPL (probabilidades fuera del intervalo $[0,1]$ e heterocedasticidad).
+
+---
+
+🌐 **Dashboard Interactivo:** [Ver Dashboard en Vercel](https://proyecto-econometria-enemdu-qwji.vercel.app)  
+✍️ **Autor:** Sofía Ortega
                                                        
