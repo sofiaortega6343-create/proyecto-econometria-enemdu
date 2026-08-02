@@ -90,7 +90,6 @@
 
         <!-- Indicadores KPI Clave -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <!-- Card 1 -->
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Escolaridad</span>
@@ -107,7 +106,6 @@
                 <span class="text-[10px] text-slate-400 mt-2 block">Logit AME (p &lt; 0.001) ***</span>
             </div>
 
-            <!-- Card 2 -->
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Edad / Experiencia</span>
@@ -124,7 +122,6 @@
                 <span class="text-[10px] text-slate-400 mt-2 block">Logit AME (p &lt; 0.001) ***</span>
             </div>
 
-            <!-- Card 3 -->
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Bondad de Ajuste</span>
@@ -141,7 +138,6 @@
                 <span class="text-[10px] text-slate-400 mt-2 block">AIC: 915.86 | BIC: 940.40</span>
             </div>
 
-            <!-- Card 4 -->
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Prueba LR</span>
@@ -159,7 +155,7 @@
             </div>
         </div>
 
-        <!-- Seccion de Gráficas Interactivas -->
+        <!-- Seccion de Gráficas Interactivas (Fila 1) -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
             <!-- Gráfica 1 -->
@@ -185,6 +181,44 @@
                 </div>
                 <div class="relative h-72 w-full">
                     <canvas id="chartCurvaLogit"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Seccion de Gráficas Interactivas (Fila 2 - NUEVAS GRÁFICAS) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Gráfica 3: Efecto Ciclo Vital / Edad -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 md:col-span-1">
+                <div class="mb-4">
+                    <h3 class="text-base font-bold text-slate-900">3. Riesgo por Edad</h3>
+                    <p class="text-xs text-slate-500">Evolución del riesgo de informalidad por edad</p>
+                </div>
+                <div class="relative h-64 w-full">
+                    <canvas id="chartEdad"></canvas>
+                </div>
+            </div>
+
+            <!-- Gráfica 4: Dona Ajuste Modelo -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 md:col-span-1">
+                <div class="mb-4">
+                    <h3 class="text-base font-bold text-slate-900">4. Ajuste del Modelo</h3>
+                    <p class="text-xs text-slate-500">Explicado vs Residuo (Pseudo R²)</p>
+                </div>
+                <div class="relative h-64 w-full flex items-center justify-center">
+                    <canvas id="chartDona"></canvas>
+                </div>
+            </div>
+
+            <!-- Gráfica 5: Radar de Impacto -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 md:col-span-1">
+                <div class="mb-4">
+                    <h3 class="text-base font-bold text-slate-900">5. Radar de Impacto</h3>
+                    <p class="text-xs text-slate-500">Sensibilidad relativa de variables</p>
+                </div>
+                <div class="relative h-64 w-full flex items-center justify-center">
+                    <canvas id="chartRadar"></canvas>
                 </div>
             </div>
 
@@ -250,7 +284,7 @@
         Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
         Chart.defaults.color = '#64748b';
 
-        // Chart 1
+        // Chart 1: Barras
         const ctx1 = document.getElementById('chartEfectos').getContext('2d');
         new Chart(ctx1, {
             type: 'bar',
@@ -275,13 +309,11 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: { legend: { position: 'top' } },
-                scales: {
-                    y: { title: { display: true, text: 'Cambio en Probabilidad (%)' } }
-                }
+                scales: { y: { title: { display: true, text: 'Cambio en Probabilidad (%)' } } }
             }
         });
 
-        // Chart 2
+        // Chart 2: Curva Logística Escolaridad
         const ctx2 = document.getElementById('chartCurvaLogit').getContext('2d');
         new Chart(ctx2, {
             type: 'line',
@@ -300,9 +332,69 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: {
-                    y: { min: 0, max: 100, title: { display: true, text: 'Probabilidad (%)' } }
-                }
+                scales: { y: { min: 0, max: 100, title: { display: true, text: 'Probabilidad (%)' } } }
+            }
+        });
+
+        // Chart 3: Efecto Edad
+        const ctx3 = document.getElementById('chartEdad').getContext('2d');
+        new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['18 años', '25 años', '35 años', '45 años', '55 años', '65 años'],
+                datasets: [{
+                    label: 'Riesgo Informalidad (%)',
+                    data: [58, 55, 52, 48, 45, 41],
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    fill: true,
+                    tension: 0.2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Chart 4: Dona
+        const ctx4 = document.getElementById('chartDona').getContext('2d');
+        new Chart(ctx4, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pseudo R²', 'Residuo'],
+                datasets: [{
+                    data: [8.98, 91.02],
+                    backgroundColor: ['#2563eb', '#e2e8f0']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+
+        // Chart 5: Radar
+        const ctx5 = document.getElementById('chartRadar').getContext('2d');
+        new Chart(ctx5, {
+            type: 'radar',
+            data: {
+                labels: ['Escolaridad', 'Edad', 'Sexo', 'Área'],
+                datasets: [{
+                    label: 'Magnitud Efecto',
+                    data: [85, 60, 40, 30],
+                    backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                    borderColor: '#2563eb',
+                    pointBackgroundColor: '#2563eb'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } }
             }
         });
     </script>
