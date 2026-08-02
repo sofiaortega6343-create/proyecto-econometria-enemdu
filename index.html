@@ -186,10 +186,10 @@
 
         </div>
 
-        <!-- Seccion de Gráficas Interactivas (Fila 2 - NUEVAS GRÁFICAS) -->
+        <!-- Seccion de Gráficas Interactivas (Fila 2) -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <!-- Gráfica 3: Efecto Ciclo Vital / Edad -->
+            <!-- Gráfica 3 -->
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 md:col-span-1">
                 <div class="mb-4">
                     <h3 class="text-base font-bold text-slate-900">3. Riesgo por Edad</h3>
@@ -200,7 +200,7 @@
                 </div>
             </div>
 
-            <!-- Gráfica 4: Dona Ajuste Modelo -->
+            <!-- Gráfica 4 -->
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 md:col-span-1">
                 <div class="mb-4">
                     <h3 class="text-base font-bold text-slate-900">4. Ajuste del Modelo</h3>
@@ -211,7 +211,7 @@
                 </div>
             </div>
 
-            <!-- Gráfica 5: Radar de Impacto -->
+            <!-- Gráfica 5 -->
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 md:col-span-1">
                 <div class="mb-4">
                     <h3 class="text-base font-bold text-slate-900">5. Radar de Impacto</h3>
@@ -272,6 +272,24 @@
             </div>
         </div>
 
+        <!-- Caja de Conclusión Econométrica -->
+        <div class="bg-emerald-50/60 p-6 rounded-2xl border-l-4 border-emerald-500 shadow-sm border border-emerald-100/80">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-800 mb-1">Conclusión Econométrica</h4>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                Ambos modelos coinciden en la dirección de los efectos: la <strong>escolaridad</strong> y la <strong>edad</strong> son factores estadísticamente significativos para reducir el empleo informal. Se valida la preferencia por el <strong>Modelo Logit</strong> al solucionar las deficiencias del MPL (probabilidades fuera del rango 0-1 e heterocedasticidad).
+            </p>
+        </div>
+
+        <!-- Enlace Cliqueable a GitHub -->
+        <div class="text-center py-4">
+            <a href="https://github.com/sofiaortega6343-create/proyecto-econometria-enemdu" 
+               target="_blank" 
+               class="inline-flex items-center space-x-2 text-slate-700 hover:text-blue-600 font-bold text-sm transition-colors duration-200 hover:underline">
+                <span>📦 Código y Datos en GitHub</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+            </a>
+        </div>
+
     </main>
 
     <!-- Footer -->
@@ -284,7 +302,7 @@
         Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
         Chart.defaults.color = '#64748b';
 
-        // Chart 1: Barras
+        // Chart 1
         const ctx1 = document.getElementById('chartEfectos').getContext('2d');
         new Chart(ctx1, {
             type: 'bar',
@@ -292,13 +310,13 @@
                 labels: ['Escolaridad', 'Edad', 'Sexo (Hombre)', 'Área (Urbana)'],
                 datasets: [
                     {
-                        label: 'MPL (MCO) %',
+                        label: 'Modelo 1: MPL (MCO) %',
                         data: [-1.92, -0.38, -4.35, -3.62],
                         backgroundColor: '#cbd5e1',
                         borderRadius: 6
                     },
                     {
-                        label: 'Logit (AME) %',
+                        label: 'Modelo 2: Logit (AME) %',
                         data: [-1.86, -0.35, -4.19, -3.51],
                         backgroundColor: '#2563eb',
                         borderRadius: 6
@@ -313,7 +331,7 @@
             }
         });
 
-        // Chart 2: Curva Logística Escolaridad
+        // Chart 2
         const ctx2 = document.getElementById('chartCurvaLogit').getContext('2d');
         new Chart(ctx2, {
             type: 'line',
@@ -336,7 +354,7 @@
             }
         });
 
-        // Chart 3: Efecto Edad
+        // Chart 3
         const ctx3 = document.getElementById('chartEdad').getContext('2d');
         new Chart(ctx3, {
             type: 'line',
@@ -358,7 +376,7 @@
             }
         });
 
-        // Chart 4: Dona
+        // Chart 4
         const ctx4 = document.getElementById('chartDona').getContext('2d');
         new Chart(ctx4, {
             type: 'doughnut',
@@ -377,7 +395,7 @@
             }
         });
 
-        // Chart 5: Radar
+        // Chart 5
         const ctx5 = document.getElementById('chartRadar').getContext('2d');
         new Chart(ctx5, {
             type: 'radar',
